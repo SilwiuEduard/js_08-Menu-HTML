@@ -94,25 +94,26 @@ window.addEventListener("DOMContentLoaded", function () {
 //gather relavent items from the menu
 function displayMenuItems(x) {
   //return a html string of menu items
-  let displayMenu = x.map((item) => {
+  let displayMenu = x.map((menu) => {
     return `        
        <article class="menu-item">
-          <img src=${item.img} alt=${item.title} class="photo" />
+          <img src=${menu.img} alt=${menu.title} class="photo" />
           <div class="item-info">
             <header>
-              <h4>${item.title}</h4>
-              <h4 class="price">$${item.price}</h4>
+              <h4>${menu.title}</h4>
+              <h4 class="price">$${menu.price}</h4>
             </header>
             <p class="item-text">
-             ${item.desc}
+             ${menu.desc}
             </p>
           </div>
         </article>`;
   });
   displayMenu = displayMenu.join("");
+  console.log(displayMenu);
   sectionCenter.innerHTML = displayMenu;
 }
-
+// check each item and create unique buttons for <menu> Category
 function displayMenuButtons() {
   const categories = menu.reduce(
     function (values, item) {
@@ -123,6 +124,8 @@ function displayMenuButtons() {
     },
     ["all"]
   );
+
+  // change the innerHTML and add buttons to array
   const categoryBtns = categories
     .map((category) => {
       return `<button type="button" class="filter-btn" data-id="${category}">
@@ -131,6 +134,7 @@ function displayMenuButtons() {
     })
     .join("");
   container.innerHTML = categoryBtns;
+
   const filterBtn = document.querySelectorAll(".filter-btn");
   // filter Items
   filterBtn.forEach((btn) => {
